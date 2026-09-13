@@ -70,6 +70,53 @@ export const PROJECTS = [
   },
 ]
 
+export const TECH_STACKS = [
+  {
+    id: 'maguro',
+    name: 'Maguro',
+    accent: '#8E1C24',
+    skills: [
+      { label: 'Python', color: '#c45c4a' },
+      { label: 'pandas', color: '#e07a5f' },
+      { label: 'scikit-learn', color: '#c23b3b' },
+      { label: 'PyTorch', color: '#8E1C24' },
+    ],
+  },
+  {
+    id: 'salmon',
+    name: 'Salmon',
+    accent: '#FF6F59',
+    skills: [
+      { label: 'Ollama', color: '#FF6F59' },
+      { label: 'DataHub', color: '#d4a574' },
+      { label: 'SQL', color: '#8E1C24' },
+      { label: 'RAG / LLMs', color: '#5b8def' },
+    ],
+  },
+  {
+    id: 'tamago',
+    name: 'Tamago',
+    accent: '#e2b84a',
+    skills: [
+      { label: 'React', color: '#e2b84a' },
+      { label: 'TypeScript', color: '#f4a261' },
+      { label: 'Next.js', color: '#8a6a3a' },
+      { label: 'Tailwind CSS', color: '#7a8f3d' },
+    ],
+  },
+  {
+    id: 'wasabi',
+    name: 'Wasabi',
+    accent: '#7d9b4e',
+    skills: [
+      { label: 'Figma', color: '#8fb44a' },
+      { label: 'Git', color: '#6f8f3a' },
+      { label: 'REST API', color: '#5c7340' },
+      { label: 'Vite', color: '#CADB66' },
+    ],
+  },
+]
+
 export const KITCHEN_TICKETS = [
   {
     no: '01',

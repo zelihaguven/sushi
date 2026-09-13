@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import LegoChefAvatar from './LegoChefAvatar'
 import TypewriterDesk from './TypewriterDesk'
 import { OpeningNoren, SteamSpores } from './NorenEntrance'
+import { HeroNoren } from './ShopFront'
 
 function clamp01(value) {
   return Math.max(0, Math.min(1, value))
@@ -9,7 +9,7 @@ function clamp01(value) {
 
 function PortalStage({ progress }) {
   const ease = progress * progress * (3 - 2 * progress)
-  const portalScale = 1 + ease * 2.5
+  const portalScale = 1 + ease * 1.45
   const portalOpacity = 1 - clamp01(ease / 0.52)
   const workshopIn = clamp01((ease - 0.48) / 0.36)
   const workshopScale = 0.72 + 0.28 * workshopIn
@@ -17,11 +17,12 @@ function PortalStage({ progress }) {
 
   return (
     <div className="relative h-screen overflow-hidden bg-[#141A17]">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_#8E1C24_0%,_#141A17_62%,_#0C100E_100%)]" />
-      <SteamSpores progress={ease} />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_48%,_#8E1C24_0%,_#141A17_38%,_#0C100E_100%)]" />
+      <SteamSpores progress={ease * 0.35} />
+      <HeroNoren />
 
       <div
-        className="absolute inset-0 z-10 flex origin-center items-center justify-center will-change-transform"
+        className="absolute inset-0 z-[14] flex origin-center items-center justify-center will-change-transform"
         style={{
           transform: `scale(${portalScale})`,
           opacity: portalOpacity,
@@ -29,19 +30,22 @@ function PortalStage({ progress }) {
           visibility: portalOpacity < 0.02 ? 'hidden' : 'visible',
         }}
       >
-        <div className="relative flex h-full w-full flex-col items-center justify-center px-4 pt-16 text-center">
-          <p className="font-sans text-[11px] font-medium uppercase tracking-[0.36em] text-[#CADB66]">irasshaimase</p>
-          <h1 className="font-display mt-4 text-[clamp(2.4rem,7vw,4.8rem)] leading-[0.95] text-cream">
+        <div className="relative flex h-full w-full flex-col items-center justify-center px-4 pb-16 pt-28 text-center">
+          <p className="jp text-5xl text-[#CADB66] sm:text-6xl">鮨</p>
+          <p className="mt-5 font-sans text-[11px] font-medium uppercase tracking-[0.4em] text-[#CADB66]/80">
+            irasshaimase
+          </p>
+          <h1 className="font-display mt-4 text-[clamp(2.6rem,7vw,5.2rem)] leading-[0.92] text-cream">
             the product engineer&apos;s
             <br />
             <span className="swash text-[1.06em] text-[#CADB66]">omakase.</span>
           </h1>
-          <p className="mx-auto mt-5 max-w-xl font-serif text-lg leading-8 text-cream/75 sm:text-xl">
+          <p className="mx-auto mt-6 max-w-md font-serif text-lg leading-8 text-cream/70">
             Freshly engineered digital systems, prepared to order.
           </p>
-          <div className="relative z-10 mt-6">
-            <LegoChefAvatar greeting />
-          </div>
+          <p className="mt-12 font-sans text-[10px] uppercase tracking-[0.32em] text-cream/40">
+            scroll to be seated
+          </p>
         </div>
       </div>
 

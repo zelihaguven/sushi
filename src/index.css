@@ -14,6 +14,9 @@
 
 :root {
   color-scheme: dark;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
   --nori: #141a17;
   --maguro: #8e1c24;
   --sake: #ff6f59;
@@ -52,8 +55,8 @@ body {
 }
 
 .font-display {
-  font-family: Kiban, 'Cormorant Garamond', Georgia, serif;
-  font-weight: 400;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
   letter-spacing: -0.02em;
 }
 
@@ -85,9 +88,9 @@ body {
   pointer-events: none;
   position: fixed;
   inset: 0;
-  z-index: 40;
-  opacity: 0.08;
-  mix-blend-mode: soft-light;
+  z-index: 1;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
 }
 
@@ -214,7 +217,6 @@ body {
 
 .noren-sway {
   transform-origin: top center;
-  animation: noren-sway 4.8s ease-in-out infinite;
 }
 
 @keyframes steam-rise {
@@ -268,6 +270,43 @@ body {
   transform: translateY(0) scale(1);
 }
 
+.sushi-sticker {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  pointer-events: none;
+  transform-origin: 50% 80%;
+  animation: sushi-bob 2.8s var(--ease-in-out) infinite;
+}
+
+.sushi-sticker--fridge {
+  width: 148px;
+  animation-duration: 3.2s;
+}
+
+.sushi-sticker--buddy {
+  width: 52px;
+  animation-duration: 2.4s;
+}
+
+.sushi-sticker--ginger {
+  width: 58px;
+  margin-top: 2px;
+  animation-duration: 2.6s;
+  animation-delay: 0.35s;
+}
+
+@keyframes sushi-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
 .sushi-card .plate-cut {
   margin-top: 2px;
   text-align: center;
@@ -281,10 +320,10 @@ body {
 .sushi-card .plate-title {
   margin: -2px 0 0;
   text-align: center;
-  font-family: Kiban, 'Cormorant Garamond', Georgia, serif;
+  font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: 1.85rem;
-  font-style: normal;
-  font-weight: 400;
+  font-style: italic;
+  font-weight: 500;
   color: #FCF8F2;
 }
 
@@ -416,6 +455,86 @@ body {
   color: #CADB66;
 }
 
+.pressable {
+  transition:
+    transform 160ms var(--ease-out),
+    color 160ms ease,
+    border-color 160ms ease,
+    background-color 160ms ease;
+}
+
+.pressable:active {
+  transform: scale(0.97);
+}
+
+.nav-link {
+  transition:
+    color 160ms ease,
+    transform 160ms var(--ease-out);
+}
+
+.nav-link:active {
+  transform: scale(0.97);
+}
+
+.hero-line {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: hero-in 300ms var(--ease-out) forwards;
+}
+
+.hero-line:nth-child(2) { animation-delay: 50ms; }
+.hero-line:nth-child(3) { animation-delay: 100ms; }
+.hero-line:nth-child(4) { animation-delay: 160ms; }
+.hero-line:nth-child(5) { animation-delay: 220ms; }
+.hero-line:nth-child(6) { animation-delay: 280ms; }
+.hero-line:nth-child(7) { animation-delay: 320ms; }
+
+@keyframes hero-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 300ms var(--ease-out),
+    transform 300ms var(--ease-out);
+}
+
+.reveal[data-visible] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.plating-panel {
+  opacity: 1;
+  transform: scale(1);
+  transform-origin: center;
+  transition:
+    opacity 250ms var(--ease-out),
+    transform 250ms var(--ease-out);
+
+  @starting-style {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .nav-link:hover {
+    color: var(--wasabi);
+  }
+
+  .link-quiet:hover {
+    color: var(--wasabi);
+    border-color: var(--wasabi);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -425,15 +544,25 @@ body {
   .floaty,
   .spore,
   .kaiten-track,
-  .noren-sway,
-  .steam {
+  .steam,
+  .hero-line,
+  .sushi-sticker {
     animation: none;
+  }
+
+  .hero-line,
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 
   .sushi-plate,
   .layer-ui,
   .layer-garnish,
-  .layer-stamp {
+  .layer-stamp,
+  .plating-panel,
+  .pressable {
     transition: none;
   }
 }

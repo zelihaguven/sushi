@@ -30,12 +30,14 @@ export default {
         },
       },
       fontFamily: {
-        display: ['Kiban', '"Cormorant Garamond"', 'Georgia', 'serif'],
-        serif: ['"Cormorant Garamond"', 'Kiban', 'Georgia', 'serif'],
+        display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
         type: ['"Courier Prime"', 'ui-monospace', 'monospace'],
       },
       transitionTimingFunction: {
+        out: 'cubic-bezier(0.23, 1, 0.32, 1)',
+        'in-out': 'cubic-bezier(0.77, 0, 0.175, 1)',
         burst: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
         bounce: 'cubic-bezier(0.34, 1.7, 0.64, 1)',
       },

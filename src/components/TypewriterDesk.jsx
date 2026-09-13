@@ -79,7 +79,7 @@ export default function TypewriterDesk({ active = true, embedded = false }) {
         <button
           type="button"
           onClick={() => setSoundOn((v) => !v)}
-          className="inline-flex items-center gap-1.5 rounded-full border border-cream/15 bg-[#8E1C24]/80 px-3 py-1.5 font-sans text-[10px] font-medium uppercase tracking-[0.16em] text-[#FCF8F2]/80 transition hover:text-[#CADB66]"
+          className="pressable link-quiet inline-flex items-center gap-1.5 rounded-full border border-cream/15 bg-[#8E1C24]/80 px-3 py-1.5 font-sans text-[10px] font-medium uppercase tracking-[0.16em] text-[#FCF8F2]/80"
           aria-pressed={soundOn}
         >
           {soundOn ? <Volume2 size={12} /> : <VolumeX size={12} />}

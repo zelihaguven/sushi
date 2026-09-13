@@ -1,128 +1,68 @@
-import { useEffect, useRef, useState } from 'react'
 import TypewriterDesk from './TypewriterDesk'
-import { OpeningNoren, SteamSpores } from './NorenEntrance'
-import { HeroNoren } from './ShopFront'
-
-function clamp01(value) {
-  return Math.max(0, Math.min(1, value))
-}
-
-function PortalStage({ progress }) {
-  const ease = progress * progress * (3 - 2 * progress)
-  const portalScale = 1 + ease * 1.45
-  const portalOpacity = 1 - clamp01(ease / 0.52)
-  const workshopIn = clamp01((ease - 0.48) / 0.36)
-  const workshopScale = 0.72 + 0.28 * workshopIn
-  const arrived = ease > 0.64
-
-  return (
-    <div className="relative h-screen overflow-hidden bg-[#141A17]">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_48%,_#8E1C24_0%,_#141A17_38%,_#0C100E_100%)]" />
-      <SteamSpores progress={ease * 0.35} />
-      <HeroNoren />
-
-      <div
-        className="absolute inset-0 z-[14] flex origin-center items-center justify-center will-change-transform"
-        style={{
-          transform: `scale(${portalScale})`,
-          opacity: portalOpacity,
-          pointerEvents: portalOpacity < 0.08 ? 'none' : 'auto',
-          visibility: portalOpacity < 0.02 ? 'hidden' : 'visible',
-        }}
-      >
-        <div className="relative flex h-full w-full flex-col items-center justify-center px-4 pb-16 pt-28 text-center">
-          <p className="jp text-5xl text-[#CADB66] sm:text-6xl">鮨</p>
-          <p className="mt-5 font-sans text-[11px] font-medium uppercase tracking-[0.4em] text-[#CADB66]/80">
-            irasshaimase
-          </p>
-          <h1 className="font-display mt-4 text-[clamp(2.6rem,7vw,5.2rem)] leading-[0.92] text-cream">
-            the product engineer&apos;s
-            <br />
-            <span className="swash text-[1.06em] text-[#CADB66]">omakase.</span>
-          </h1>
-          <p className="mx-auto mt-6 max-w-md font-serif text-lg leading-8 text-cream/70">
-            Freshly engineered digital systems, prepared to order.
-          </p>
-          <p className="mt-12 font-sans text-[10px] uppercase tracking-[0.32em] text-cream/40">
-            scroll to be seated
-          </p>
-        </div>
-      </div>
-
-      <OpeningNoren progress={ease} />
-
-      <div
-        className="absolute inset-0 z-20 flex origin-center items-center justify-center will-change-transform"
-        style={{
-          opacity: workshopIn,
-          transform: `scale(${workshopScale})`,
-          pointerEvents: arrived ? 'auto' : 'none',
-          visibility: workshopIn < 0.02 ? 'hidden' : 'visible',
-        }}
-        aria-hidden={!arrived}
-        {...(!arrived ? { inert: '' } : {})}
-      >
-        <div className="relative w-full max-w-5xl px-4">
-          <TypewriterDesk active={arrived} embedded />
-        </div>
-      </div>
-    </div>
-  )
-}
+import { SOCIALS } from '../data/content'
 
 export default function PortalHero() {
-  const wrapRef = useRef(null)
-  const [progress, setProgress] = useState(0)
-  const [reduced, setReduced] = useState(false)
-
-  useEffect(() => {
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)')
-    setReduced(media.matches)
-    const onMedia = () => setReduced(media.matches)
-    media.addEventListener('change', onMedia)
-
-    let raf = 0
-    const update = () => {
-      const node = wrapRef.current
-      if (!node) return
-      const total = node.offsetHeight - window.innerHeight
-      const top = -node.getBoundingClientRect().top
-      setProgress(clamp01(total <= 0 ? 1 : top / total))
-    }
-
-    const onScroll = () => {
-      cancelAnimationFrame(raf)
-      raf = requestAnimationFrame(update)
-    }
-
-    update()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll)
-    return () => {
-      cancelAnimationFrame(raf)
-      media.removeEventListener('change', onMedia)
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onScroll)
-    }
-  }, [])
-
-  if (reduced) {
-    return (
-      <>
-        <section id="top" className="relative">
-          <PortalStage progress={0} />
-        </section>
-        <TypewriterDesk active embedded={false} />
-      </>
-    )
-  }
-
   return (
-    <section ref={wrapRef} id="top" className="relative h-[250vh]">
-      <div className="sticky top-0">
-        <PortalStage progress={progress} />
-      </div>
-      <div id="note" className="absolute bottom-0 h-screen w-px" />
-    </section>
+    <>
+      <section id="top" className="relative flex min-h-[100svh] flex-col items-center justify-center px-6 pb-8 pt-20">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_40%,_#8E1C24_0%,_#141A17_44%,_#0C100E_100%)]" />
+
+        <div className="relative z-10 mx-auto flex w-full max-w-2xl flex-col items-center text-center">
+          <p className="hero-line font-sans text-[10px] font-medium uppercase tracking-[0.32em] text-lime sm:text-[11px]">
+            a product engineer’s sushi world
+          </p>
+          <h1 className="hero-line font-display mt-3 text-[clamp(2.2rem,8.4vw,5.2rem)] font-semibold leading-[0.96] text-cream [text-shadow:0_2px_28px_rgba(12,16,14,0.55)]">
+            Zeliha Ilgın Güven
+          </h1>
+          <p className="hero-line mt-2 font-sans text-[11px] font-medium uppercase tracking-[0.28em] text-cream/75 sm:mt-3 sm:text-[12px]">
+            Product Engineer
+          </p>
+          <p className="hero-line mt-3 max-w-lg font-serif text-[15px] italic leading-6 text-cream/80 sm:mt-4 sm:text-xl sm:leading-8">
+            Omakase is a tasting menu the chef chooses. Mine is products — plated one piece at a time.
+          </p>
+
+          <div className="hero-line mt-3 sm:mt-5">
+            <img
+              src="/sushi/itamae-chef.png"
+              alt="Sushi master plating a cute salmon nigiri"
+              draggable={false}
+              className="sushi-sticker mx-auto h-auto w-[108px] max-h-[26svh] object-contain sm:w-[200px] sm:max-h-[36svh]"
+            />
+          </div>
+
+          <div className="hero-line mt-4 flex flex-wrap items-center justify-center gap-3 sm:mt-5">
+            <a
+              href="#work"
+              className="pressable rounded-full bg-lime px-5 py-2.5 font-sans text-sm font-semibold text-nori"
+            >
+              see the work
+            </a>
+            <a
+              href="#note"
+              className="pressable rounded-full border border-cream/20 px-5 py-2.5 font-sans text-sm text-cream"
+            >
+              the note
+            </a>
+          </div>
+
+          <div className="hero-line mt-4 flex flex-wrap justify-center gap-x-5 gap-y-2 font-sans text-xs tracking-wide text-cream/45 sm:mt-6">
+            <a href={`mailto:${SOCIALS.email}`} className="nav-link">
+              Email
+            </a>
+            <a href={SOCIALS.linkedin} target="_blank" rel="noreferrer" className="nav-link">
+              LinkedIn
+            </a>
+            <a href={SOCIALS.github} target="_blank" rel="noreferrer" className="nav-link">
+              GitHub
+            </a>
+            <a href={SOCIALS.medium} target="_blank" rel="noreferrer" className="nav-link">
+              Medium
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <TypewriterDesk active />
+    </>
   )
 }

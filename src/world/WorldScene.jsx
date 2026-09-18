@@ -227,10 +227,20 @@ function RecipeZone({ onSelect }) {
         <boxGeometry args={[5.15, 0.08, 3.55]} />
         <Clay color="#e8d5bf" />
       </mesh>
-      <ZoneTitle position={[RECIPE.x, 2.85, RECIPE.z + 0.2]}>recipe</ZoneTitle>
+      <ZoneTitle position={[RECIPE.x, 2.95, RECIPE.z + 0.2]}>recipe</ZoneTitle>
       {EXPERIENCES.map((experience, index) => (
         <RecipeTablet key={experience.course} experience={experience} index={index} onSelect={onSelect} />
       ))}
+      <Text
+        position={[RECIPE.x, 1.42, RECIPE.z + 1.45]}
+        fontSize={0.14}
+        color="#6d6258"
+        anchorX="center"
+        outlineWidth={0.006}
+        outlineColor="#f7efe4"
+      >
+        training
+      </Text>
       {TRAINING.map((line, index) => (
         <group key={line} position={[RECIPE.x - 1.4 + index * 1.4, 1.02, RECIPE.z + 1.45]}>
           <mesh>

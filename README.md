@@ -11,6 +11,8 @@ npm install
 npm run dev
 ```
 
+React is pinned to 19.2.3 (`@react-three/fiber` does not accept 19.3 yet). If install already failed, delete `node_modules` and run `npm install` again.
+
 Open [http://localhost:5173](http://localhost:5173).
 
 ## Controls

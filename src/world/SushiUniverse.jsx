@@ -19,7 +19,7 @@ export default function SushiUniverse({
       frameloop={reducedMotion ? 'demand' : 'always'}
       onPointerMissed={() => onSelect(null)}
       onCreated={({ gl }) => {
-        gl.setClearColor('#f3e4d4', 1)
+        gl.setClearColor('#ecd7c0', 1)
       }}
     >
       <AdaptiveDpr />

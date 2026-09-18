@@ -141,7 +141,7 @@ function DetailCard({ selection, onClose }) {
 
   return (
     <aside
-      className="pointer-events-auto absolute bottom-24 left-4 right-4 z-20 mx-auto max-w-lg rounded-3xl border border-stone-200/80 bg-[#fbf6ef]/95 p-5 shadow-xl shadow-stone-900/10 backdrop-blur-md sm:bottom-24 sm:left-6 sm:right-auto"
+      className="pointer-events-auto absolute bottom-[5.5rem] left-3 right-3 z-20 mx-auto max-w-lg rounded-3xl border border-stone-200/80 bg-[#fbf6ef]/95 p-5 shadow-xl shadow-stone-900/10 backdrop-blur-md sm:bottom-24 sm:left-6 sm:right-auto"
       role="dialog"
       aria-modal="false"
     >
@@ -176,14 +176,14 @@ export default function Hud({
         Skip to world navigation
       </a>
 
-      <header className="pointer-events-none absolute left-4 top-4 sm:left-6 sm:top-5">
+      <header className="pointer-events-none absolute left-3 top-3 rounded-2xl bg-[#fbf6ef]/85 px-3 py-2 shadow-sm sm:left-5 sm:top-5">
         <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-stone-500">sushi universe</p>
-        <h1 className="mt-1 font-sans text-lg font-semibold tracking-tight sm:text-xl">Zeliha Ilgın Güven</h1>
+        <h1 className="mt-0.5 font-sans text-lg font-semibold tracking-tight sm:text-xl">Zeliha Ilgın Güven</h1>
         <p className="text-xs text-stone-500 sm:text-sm">Product Engineer</p>
       </header>
 
       {!entered && (
-        <div className="pointer-events-auto absolute inset-0 flex items-end justify-center bg-[#f3e4d4]/55 p-4 backdrop-blur-[2px] sm:items-center">
+        <div className="pointer-events-auto absolute inset-0 flex items-end justify-center bg-[#3a322c]/15 p-4 sm:items-center">
           <div className="mb-8 w-full max-w-md rounded-3xl bg-[#fbf6ef]/95 p-6 shadow-xl shadow-stone-900/10 sm:mb-0">
             <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-stone-500">entrance</p>
             <pre className="mt-3 whitespace-pre-wrap font-sans text-[15px] leading-6 text-stone-700">{TYPEWRITER_TEXT}</pre>
@@ -205,7 +205,7 @@ export default function Hud({
 
       {entered && (
         <>
-          <p className="absolute left-4 top-[4.6rem] max-w-[14rem] text-xs text-stone-500 sm:left-6 sm:top-[5.1rem] sm:max-w-none">
+          <p className="absolute left-3 top-[5.6rem] max-w-[16rem] rounded-full bg-[#fbf6ef]/80 px-3 py-1 text-xs text-stone-500 sm:left-5 sm:top-[6.1rem] sm:max-w-none">
             {reducedMotion ? 'Tap a zone or object.' : 'Tap a zone or object · drag to look · scroll to zoom'}
           </p>
 
@@ -247,7 +247,11 @@ export default function Hud({
             ))}
           </div>
 
-          <div className="pointer-events-auto absolute bottom-[4.6rem] left-1/2 flex -translate-x-1/2 gap-3 text-[11px] text-stone-500 sm:hidden">
+          <div
+            className={`pointer-events-auto absolute bottom-[4.6rem] left-1/2 -translate-x-1/2 gap-3 text-[11px] text-stone-500 ${
+              selection ? 'hidden' : 'flex sm:hidden'
+            }`}
+          >
             {SOCIAL_LINKS.map(({ label, href }) => (
               <a
                 key={label}

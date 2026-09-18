@@ -76,7 +76,7 @@ export default function App() {
   if (!webgl) return <WebGLFallback />
 
   return (
-    <div className="relative h-[100svh] w-full overflow-hidden bg-[#f3e4d4]">
+    <div className="relative h-[100svh] w-full overflow-hidden bg-[#ecd7c0]">
       <h1 className="sr-only">Zeliha Ilgın Güven — Product Engineer sushi universe</h1>
       <CanvasErrorBoundary>
         <SushiUniverse
